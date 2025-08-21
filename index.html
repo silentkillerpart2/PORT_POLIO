@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- --------- UNICONS ---------- -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+    <!-- --------- CSS ---------- -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- --------- FAVICON ---------- -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+
+    <title>Portfolio | SIDDU</title>
+</head>
+<body>
+   <div class="container">
+    <!-- --------------- HEADER --------------- -->
+      <nav id="header">
+        <div class="nav-logo">
+            <p class="nav-name">Siddu</p>
+            <span>.</span>
+        </div>
+        <div class="nav-menu" id="myNavMenu">
+            <ul class="nav_menu_list">
+                <li class="nav_list">
+                    <a href="#home" class="nav-link active-link">Home</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a href="#about" class="nav-link">About</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a href="cerit.html" class="nav-link">Certificates</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a href="#contact" class="nav-link">Contact</a>
+                    <div class="circle"></div>
+                </li>
+            </ul>
+        </div>
+        <div class="nav-button">
+            <button class="btn">Download CV <i class="uil uil-file-alt"></i></button>
+        </div>
+        <div class="nav-menu-btn">
+            <i class="uil uil-bars" onclick="myMenuFunction()"></i>
+        </div>
+        <!-- Enhanced Theme toggle button -->
+        <div class="theme-toggle" id="theme-toggle" title="Toggle dark mode">
+            <div class="toggle-switch">
+                <i class="uil uil-sun"></i>
+                <i class="uil uil-moon"></i>
+            </div>
+        </div>
+      </nav>
+
+    <!-- -------------- MAIN ---------------- -->
+    <main class="wrapper">
+       <!-- -------------- FEATURED BOX ---------------- -->
+       <section class="featured-box" id="home">
+          <div class="featured-text">
+            <div class="featured-text-card">
+                <span><i class="uil uil-user-circle"></i> SIDDARAJU T</span>
+            </div>
+            <div class="featured-name">
+                <p>I'm <span class="typedText">STUDENT</span></p>
+            </div>
+            <div class="featured-text-info">
+                <p><i class="uil uil-graduation-cap"></i> Computer Science Engineering Student | Aspiring Software Developer
+                </p>
+            </div>
+            <div class="featured-text-btn">
+                <button class="btn blue-btn"><i class="uil uil-phone"></i> Hire Me</button>
+                <button class="btn"><i class="uil uil-file-alt"></i> Download CV</button>
+            </div>
+            <div class="social_icons">
+                <div class="icon" title="Instagram"><i class="uil uil-instagram"></i></div>
+                <div class="icon" title="LinkedIn"><i class="uil uil-linkedin-alt"></i></div>
+                <div class="icon" title="GitHub"><i class="uil uil-github-alt"></i></div>
+                <div class="icon" title="Email"><i class="uil uil-envelope"></i></div>
+            </div>
+          </div>
+          <div class="featured-image">
+            <div class="image">
+                <img src="assets/images/siddu.png" alt="avatar">
+                <div class="image-overlay">
+                    <div class="overlay-content">
+                        <i class="uil uil-smile"></i>
+                        <p>Welcome!</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="scroll-icon-box">
+            <a href="#about" class="scroll-btn">
+                <i class="uil uil-mouse-alt"></i>
+                <p>Scroll Down</p>
+            </a>
+          </div>
+       </section>
+
+       <!-- -------------- ABOUT BOX ---------------- -->
+       <section class="section" id="about">
+          <div class="top-header">
+            <h1><i class="uil uil-user"></i> About Me</h1>
+          </div>
+          <div class="row">
+            <div class="col">
+                <div class="about-info">
+                    <h3><i class="uil uil-info-circle"></i> My introduction</h3>
+                    <p>Hello! I'm Siddraju T, a passionate Computer Science and Engineering (CSE) student at RVTM. With a deep interest in technology, software development, and problem-solving, I strive to apply my knowledge in real-world projects and innovative solutions. My journey in the world of coding and technology began during my academic career, where I developed strong skills in programming languages such as Python, Java, and C++, as well as web development, data structures, and algorithms.
+                    </p>
+                    <div class="about-btn">
+                        <button class="btn"><i class="uil uil-import"></i> Download CV</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="skills-box">
+                    <div class="skills-header">
+                        <h3><i class="uil uil-html5"></i> Frontend</h3>
+                    </div>
+                    <div class="skills-list">
+                        <span><i class="uil uil-html5"></i> HTML</span>
+                        <span><i class="uil uil-css3-simple"></i> CSS</span>
+                        <span><i class="uil uil-file-alt"></i> Excel & Word</span>
+                        <span><i class="uil uil-java-script"></i> JavaScript</span>
+                        <span><i class="uil uil-react"></i> React</span>
+                    </div>
+                </div>
+                <div class="skills-box">
+                    <div class="skills-header">
+                        <h3><i class="uil uil-server"></i> Backend</h3>
+                    </div>
+                    <div class="skills-list">
+                        <span><i class="uil uil-php"></i> PHP</span>
+                        <span><i class="uil uil-java-script"></i> JAVA</span>
+                        <span><i class="uil uil-python"></i> Python</span>
+                    </div>
+                </div>
+                <div class="skills-box">
+                    <div class="skills-header">
+                        <h3><i class="uil uil-database"></i> Database</h3>
+                    </div>
+                    <div class="skills-list">
+                        <span><i class="uil uil-database"></i> MySQL</span>
+                        <span><i class="uil uil-database"></i> MongoDB</span>
+                    </div>
+                </div>
+            </div>
+          </div>
+       </section>
+
+       <!-- -------------- PROJECT BOX ---------------- -->
+       <section class="section" id="projects">
+          <div class="top-header">
+              <h1><i class="uil uil-award"></i> Certificates & Achievements</h1>
+          </div>
+          <div class="project-container">
+            <div class="project-box">
+                <i class="uil uil-briefcase-alt"></i>
+                <h3>Completed</h3>
+                <label>10+ Finished Certificates</label>
+            </div>
+            <div class="project-box">
+                <i class="uil uil-users-alt"></i>
+                <h3>Projects</h3>
+                <label>Finished Projects</label>
+            </div>
+            <div class="project-box">
+                <i class="uil uil-award"></i>
+                <h3>Experience</h3>
+                <label>Fresher</label>
+            </div>
+          </div>
+       </section>
+
+       <!-- -------------- CONTACT BOX ---------------- -->
+       <section class="section" id="contact">
+          <div class="top-header">
+            <h1><i class="uil uil-phone"></i> Get in touch</h1>
+            <span>Do you have a project in your mind, contact me here</span>
+          </div>
+          <div class="row">
+             <div class="col">
+                <div class="contact-info">
+                    <h2><i class="uil uil-corner-right-down"></i> Find Me</h2>
+                    <p><i class="uil uil-envelope"></i> Email: siddunayak604@gmail.com</p>
+                    <p><i class="uil uil-phone"></i> Tel: +91 8151042840</p>
+                    <p><i class="uil uil-map-marker"></i> Address: Bangalore, Karnataka, India</p>
+                    <p><i class="uil uil-location-point"></i> <a href="https://goo.gl/maps/RrfuHVb6tmujbxPT6" target="_blank">View on Google Maps</a></p>
+                </div>
+             </div>
+             <div class="col">
+                <div class="form-control">
+                    <div class="form-inputs">
+                        <input type="text" class="input-field" placeholder="Name" required>
+                        <input type="email" class="input-field" placeholder="Email" required>
+                    </div>
+                    <div class="text-area">
+                        <textarea placeholder="Message" required></textarea>
+                    </div>
+                    <div class="form-button">
+                        <button class="btn"><i class="uil uil-message"></i> Send Message</button>
+                    </div>
+                </div>
+             </div>
+          </div>
+       </section>
+    </main>
+
+    <!-- --------------- FOOTER --------------- -->
+    <footer>
+        <div class="top-footer">
+            <p>Siddaraju . T</p>
+        </div>
+        <div class="middle-footer">
+            <ul class="footer-menu">
+                <li class="footer_menu_list">
+                    <a href="#home">Home</a>
+                </li>
+                <li class="footer_menu_list">
+                    <a href="#about">About</a>
+                </li>
+                <li class="footer_menu_list">
+                    <a href="#projects">Projects</a>
+                </li>
+                <li class="footer_menu_list">
+                    <a href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer-social-icons">
+            <div class="icon"><i class="uil uil-instagram"></i></div>
+            <div class="icon"><i class="uil uil-linkedin-alt"></i></div>
+            <div class="icon"><i class="uil uil-dribbble"></i></div>
+            <div class="icon"><i class="uil uil-github-alt"></i></div>
+        </div>
+        <div class="bottom-footer">
+            <p>Copyright &copy; <a href="#home" style="text-decoration: none;">Siddaraju T</a> - All rights reserved</p>
+        </div>
+    </footer>
+
+    <!-- Chatbot Widget -->
+    <div class="chatbot-widget" id="chatbot-widget">
+        <div class="chatbot-toggle" id="chatbot-toggle">
+            <i class="uil uil-comment-message"></i>
+            <span class="notification-dot"></span>
+        </div>
+        <div class="chatbot-container" id="chatbot-container">
+            <div class="chatbot-header">
+                <div class="chatbot-avatar">
+                    <i class="uil uil-robot"></i>
+                </div>
+                <div class="chatbot-info">
+                    <h3>SIDDU Assistant</h3>
+                    <p>Ask me about my skills and experience!</p>
+                </div>
+                <button class="chatbot-close" id="chatbot-close">
+                    <i class="uil uil-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        <i class="uil uil-robot"></i>
+                        <p>Hello! I'm SIDDU's AI assistant. Ask me about my skills, experience, or any questions about my portfolio! 😊</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbot-input" placeholder="Type your message...">
+                <button id="chatbot-send">
+                    <i class="uil uil-message"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- ----- TYPING JS Link ----- -->
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+
+    <!-- ----- SCROLL REVEAL JS Link----- -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!-- ----- MAIN JS ----- -->
+    <script src="main.js"></script>
+</body>
+</html>
