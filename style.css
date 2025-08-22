@@ -806,6 +806,12 @@ footer{
     right: 30px;
     z-index: 1000;
     font-family: 'Poppins', sans-serif;
+    /* Prevent interference with mobile scrolling */
+    pointer-events: none;
+}
+
+.chatbot-widget * {
+    pointer-events: auto;
 }
 
 .chatbot-toggle {
@@ -862,6 +868,9 @@ footer{
     flex-direction: column;
     overflow: hidden;
     border: 1px solid #e0e0e0;
+    /* Prevent mobile scrolling interference */
+    touch-action: none;
+    -webkit-overflow-scrolling: touch;
 }
 
 .chatbot-container.active {
@@ -943,6 +952,9 @@ footer{
     display: flex;
     flex-direction: column;
     gap: 15px;
+    /* Improve mobile scrolling */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
 }
 
 .message {
@@ -1168,6 +1180,280 @@ footer{
     }
 }
 
+/* ----- MOBILE RESPONSIVE STYLES ----- */
+
+/* Mobile Navigation */
+.mobile-nav {
+    padding-inline: 5vw;
+}
+
+.mobile-nav .nav-logo .nav-name {
+    font-size: 24px;
+}
+
+.mobile-nav .nav-logo span {
+    font-size: 3em;
+    top: -10px;
+    right: -15px;
+}
+
+/* Mobile Container */
+.mobile-container {
+    padding-top: 100px;
+    padding-inline: 15px;
+}
+
+.mobile-header h1 {
+    font-size: 2.2em;
+    gap: 10px;
+}
+
+.mobile-header h1 i {
+    font-size: 0.9em;
+}
+
+.mobile-header p {
+    font-size: 1em;
+    padding: 0 10px;
+}
+
+/* Mobile Grid */
+.mobile-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 10px;
+}
+
+.mobile-card {
+    padding: 25px 20px;
+    margin-bottom: 15px;
+}
+
+.mobile-card .certificate-icon i {
+    font-size: 50px;
+}
+
+.mobile-card .certificate-content h2 {
+    font-size: 1.3em;
+    margin-bottom: 8px;
+}
+
+.mobile-card .certificate-issuer {
+    font-size: 1em;
+    margin-bottom: 8px;
+}
+
+.mobile-card .certificate-date {
+    font-size: 0.85em;
+    margin-bottom: 20px;
+}
+
+/* Mobile Actions */
+.mobile-actions {
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mobile-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+    font-size: 14px;
+}
+
+.mobile-btn i {
+    font-size: 14px;
+}
+
+/* Mobile Footer */
+.mobile-footer {
+    padding-block: 30px 40px;
+    row-gap: 20px;
+}
+
+.mobile-footer .top-footer p {
+    font-size: 20px;
+}
+
+.mobile-footer-menu {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.mobile-footer-menu .footer_menu_list a {
+    margin-inline: 10px;
+    font-size: 14px;
+}
+
+.mobile-social-icons {
+    gap: 20px;
+}
+
+.mobile-social-icons .icon {
+    width: 35px;
+    height: 35px;
+}
+
+.mobile-footer .bottom-footer {
+    font-size: 12px;
+    text-align: center;
+    padding: 0 15px;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Touch-friendly improvements */
+.mobile-nav .nav-menu-btn {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-nav .theme-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+    /* Improve touch targets */
+    .btn, .nav-link, .icon {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Better spacing for mobile */
+    .certificate-container {
+        padding-top: 80px;
+    }
+    
+    /* Optimize text sizes for mobile */
+    .certificate-header h1 {
+        font-size: 1.8em;
+        line-height: 1.2;
+    }
+    
+    .certificate-header p {
+        font-size: 0.9em;
+        line-height: 1.4;
+    }
+    
+    /* Improve card spacing */
+    .certificate-card {
+        margin-bottom: 20px;
+    }
+    
+    /* Better button layout */
+    .certificate-actions {
+        gap: 10px;
+    }
+    
+    /* Optimize footer for mobile */
+    .footer {
+        padding-block: 25px 35px;
+    }
+    
+    .footer-menu {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .footer_menu_list a {
+        padding: 8px 0;
+        display: block;
+    }
+    
+    /* Mobile chatbot improvements */
+    .chatbot-widget {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .chatbot-toggle {
+        width: 55px;
+        height: 55px;
+        box-shadow: 0 4px 15px rgba(25, 118, 210, 0.4);
+    }
+    
+    .chatbot-toggle i {
+        font-size: 22px;
+    }
+    
+    .chatbot-container {
+        bottom: 85px;
+        right: -5px;
+        width: 320px;
+        height: 450px;
+        /* Prevent mobile scrolling interference */
+        position: fixed;
+        touch-action: pan-y;
+    }
+    
+    .chatbot-messages {
+        /* Ensure smooth scrolling within chatbot */
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+        touch-action: pan-y;
+    }
+    
+    /* Prevent chatbot from interfering with page scroll */
+    .chatbot-container.active {
+        position: fixed;
+        z-index: 1001;
+    }
+}
+
+/* Landscape mobile optimization */
+@media (max-width: 768px) and (orientation: landscape) {
+    .certificate-container {
+        padding-top: 70px;
+    }
+    
+    .certificate-header {
+        margin-bottom: 2em;
+    }
+    
+    .certificates-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 15px;
+    }
+}
+
+/* High DPI mobile devices */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .certificate-card {
+        border-width: 0.5px;
+    }
+    
+    .btn {
+        border-width: 0.5px;
+    }
+}
+
 /* ----- MEDIA QUERY == 540px / RESPONSIVE ----- */
 @media only screen and (max-width: 540px){
     .featured-name{
@@ -1203,6 +1489,58 @@ footer{
     }
     .chatbot-toggle i {
         font-size: 20px;
+    }
+    
+    /* Enhanced mobile styles */
+    .mobile-nav {
+        padding-inline: 4vw;
+    }
+    
+    .mobile-container {
+        padding-top: 90px;
+        padding-inline: 10px;
+    }
+    
+    .mobile-header h1 {
+        font-size: 1.8em;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .mobile-header h1 i {
+        font-size: 0.8em;
+    }
+    
+    .mobile-header p {
+        font-size: 0.9em;
+        line-height: 1.4;
+    }
+    
+    .mobile-card {
+        padding: 20px 15px;
+    }
+    
+    .mobile-card .certificate-icon i {
+        font-size: 45px;
+    }
+    
+    .mobile-card .certificate-content h2 {
+        font-size: 1.2em;
+    }
+    
+    .mobile-btn {
+        padding: 12px 16px;
+        font-size: 13px;
+    }
+    
+    .mobile-footer-menu {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .mobile-footer-menu .footer_menu_list a {
+        margin-inline: 0;
+        padding: 8px 0;
     }
 }
 
