@@ -190,6 +190,23 @@ class Chatbot {
         this.bindEvents();
         this.loadResponses();
         this.checkBackendAvailability();
+        
+        // Handle window resize and orientation changes
+        window.addEventListener('resize', () => {
+            // If chatbot is open and screen size changes, close it to prevent issues
+            if (this.isOpen && window.innerWidth > 768) {
+                this.closeChat();
+            }
+        });
+        
+        // Handle orientation change on mobile
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                if (this.isOpen) {
+                    this.closeChat();
+                }
+            }, 100);
+        });
     }
 
     async checkBackendAvailability() {
@@ -213,11 +230,29 @@ class Chatbot {
     }
 
     bindEvents() {
-        this.toggle.addEventListener('click', () => this.toggleChat());
-        this.closeBtn.addEventListener('click', () => this.closeChat());
-        this.sendBtn.addEventListener('click', () => this.sendMessage());
+        this.toggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.toggleChat();
+        });
+        
+        this.closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.closeChat();
+        });
+        
+        this.sendBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.sendMessage();
+        });
+        
         this.input.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') this.sendMessage();
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                this.sendMessage();
+            }
         });
 
         // Close chat when clicking outside
@@ -226,6 +261,22 @@ class Chatbot {
                 this.closeChat();
             }
         });
+        
+        // Prevent chatbot from interfering with page scroll on mobile
+        this.container.addEventListener('touchstart', (e) => {
+            e.stopPropagation();
+        }, { passive: true });
+        
+        this.container.addEventListener('touchmove', (e) => {
+            e.stopPropagation();
+        }, { passive: true });
+        
+        // Prevent page scroll when chatbot is open on mobile
+        this.container.addEventListener('wheel', (e) => {
+            if (this.isOpen) {
+                e.stopPropagation();
+            }
+        }, { passive: true });
     }
 
     loadResponses() {
@@ -277,14 +328,35 @@ class Chatbot {
             // Remove notification dot
             const notificationDot = document.querySelector('.notification-dot');
             if (notificationDot) notificationDot.style.display = 'none';
+            
+            // Prevent body scroll on mobile when chatbot is open
+            if (window.innerWidth <= 768) {
+                document.body.style.overflow = 'hidden';
+                document.body.style.position = 'fixed';
+                document.body.style.width = '100%';
+            }
         } else {
             this.container.classList.remove('active');
+            
+            // Restore body scroll on mobile
+            if (window.innerWidth <= 768) {
+                document.body.style.overflow = '';
+                document.body.style.position = '';
+                document.body.style.width = '';
+            }
         }
     }
 
     closeChat() {
         this.isOpen = false;
         this.container.classList.remove('active');
+        
+        // Restore body scroll on mobile
+        if (window.innerWidth <= 768) {
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+        }
     }
 
     async sendMessage() {
