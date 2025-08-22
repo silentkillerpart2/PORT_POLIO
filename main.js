@@ -1,4 +1,4 @@
-/* ----- NAVIGATION BAR FUNCTION ----- */
+
 function myMenuFunction(){
     var menuBtn = document.getElementById("myNavMenu");
 
@@ -9,28 +9,23 @@ function myMenuFunction(){
     }
   }
 
-/* ----- ADD SHADOW ON NAVIGATION BAR WHILE SCROLLING ----- */
+
   window.onscroll = function() {headerShadow()};
 
   function headerShadow() {
     const navHeader =document.getElementById("header");
 
     if (document.body.scrollTop > 50 || document.documentElement.scrollTop >  50) {
-
       navHeader.style.boxShadow = "0 1px 6px rgba(0, 0, 0, 0.1)";
+      navHeader.style.height = "60px";
+      navHeader.style.lineHeight = "60px";
+    } else {
+      navHeader.style.boxShadow = "none";
       navHeader.style.height = "70px";
       navHeader.style.lineHeight = "70px";
-
-    } else {
-
-      navHeader.style.boxShadow = "none";
-      navHeader.style.height = "90px";
-      navHeader.style.lineHeight = "90px";
-
     }
   }
 
-/* ----- TYPING EFFECT ----- */
  var typingEffect = new Typed(".typedText",{
     strings : ["STUDENT","FRESHER", "DEVELOPER"],
     loop : true,
@@ -39,7 +34,7 @@ function myMenuFunction(){
     backDelay : 2000
  })
 
-/* ----- ## -- SCROLL REVEAL ANIMATION -- ## ----- */
+
  const sr = ScrollReveal({
         origin: 'top',
         distance: '80px',
@@ -47,7 +42,6 @@ function myMenuFunction(){
         reset: true     
  })
 
-/* -- HOME -- */
 sr.reveal('.featured-text-card',{})
 sr.reveal('.featured-name',{delay: 100})
 sr.reveal('.featured-text-info',{delay: 200})
@@ -55,15 +49,11 @@ sr.reveal('.featured-text-btn',{delay: 200})
 sr.reveal('.social_icons',{delay: 200})
 sr.reveal('.featured-image',{delay: 300})
 
-/* -- PROJECT BOX -- */
 sr.reveal('.project-box',{interval: 200})
 
-/* -- HEADINGS -- */
+
 sr.reveal('.top-header',{})
 
-/* ----- ## -- SCROLL REVEAL LEFT_RIGHT ANIMATION -- ## ----- */
-
-/* -- ABOUT INFO & CONTACT INFO -- */
 const srLeft = ScrollReveal({
   origin: 'left',
   distance: '80px',
@@ -74,7 +64,7 @@ const srLeft = ScrollReveal({
 srLeft.reveal('.about-info',{delay: 100})
 srLeft.reveal('.contact-info',{delay: 100})
 
-/* -- ABOUT SKILLS & FORM BOX -- */
+
 const srRight = ScrollReveal({
   origin: 'right',
   distance: '80px',
@@ -85,7 +75,7 @@ const srRight = ScrollReveal({
 srRight.reveal('.skills-box',{delay: 100})
 srRight.reveal('.form-control',{delay: 100})
 
-/* ----- CHANGE ACTIVE LINK ----- */
+
 const sections = document.querySelectorAll('section[id]')
 
 function scrollActive() {
@@ -110,7 +100,7 @@ function scrollActive() {
 
 window.addEventListener('scroll', scrollActive)
 
-// ----- ENHANCED THEME TOGGLE FUNCTIONALITY -----
+
 const themeToggle = document.getElementById('theme-toggle');
 const themeIcon = themeToggle ? themeToggle.querySelector('.toggle-switch') : null;
 const body = document.body;
@@ -144,13 +134,12 @@ if (themeToggle) {
     });
 }
 
-// On page load, set theme from localStorage
 window.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme');
     setTheme(savedTheme === 'dark');
 });
 
-// ----- CHATBOT FUNCTIONALITY -----
+
 class Chatbot {
     constructor() {
         this.messages = [];
@@ -402,7 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 5000);
 });
 
-// ----- FORM VALIDATION AND SUBMISSION -----
+
 document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.querySelector('.form-control');
     const nameInput = document.querySelector('input[placeholder="Name"]');
@@ -413,8 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sendButton) {
         sendButton.addEventListener('click', (e) => {
             e.preventDefault();
-            
-            // Basic validation
+
             if (!nameInput.value.trim() || !emailInput.value.trim() || !messageInput.value.trim()) {
                 alert('Please fill in all fields');
                 return;
@@ -425,7 +413,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Simulate form submission
             sendButton.innerHTML = '<i class="uil uil-spinner"></i> Sending...';
             sendButton.disabled = true;
 
@@ -446,7 +433,7 @@ function isValidEmail(email) {
     return emailRegex.test(email);
 }
 
-// ----- SMOOTH SCROLLING FOR NAVIGATION -----
+
 document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
     
