@@ -1,17 +1,14 @@
-#!/usr/bin/env python3
-"""
-SIDDU Portfolio Chatbot Backend
-A Python-based chatbot trained with resume data and portfolio information
-"""
+
 
 import json
+import os
 import random
 import re
 from datetime import datetime
 from typing import Dict, List, Optional
 import logging
 
-# Configure logging
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -22,7 +19,17 @@ class SIDDUChatbot:
         self.user_preferences = {}
         
     def load_resume_data(self) -> Dict:
-        """Load resume and portfolio data"""
+        """Load resume and portfolio data from assets/resume.json if available, else use defaults"""
+        json_path = os.path.join(os.path.dirname(__file__), 'assets', 'resume.json')
+        try:
+            if os.path.exists(json_path):
+                with open(json_path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    logger.info("Loaded resume data from assets/resume.json")
+                    return data
+        except Exception as e:
+            logger.warning(f"Failed to load assets/resume.json, using defaults. Error: {e}")
+
         return {
             "personal_info": {
                 "name": "Siddaraju T",
@@ -32,7 +39,7 @@ class SIDDUChatbot:
                 "location": "Bangalore, Karnataka, India",
                 "linkedin": "https://www.linkedin.com/in/siddaraju-t-036901250/",
                 "github": "https://github.com/silentkillerpart2",
-                "portfolio": "https://siddu-portfolio.com",
+                "portfolio": "",
                 "instagram": "https://www.instagram.com/siddu_t_036901250/"
             },
             "education": {
@@ -101,20 +108,19 @@ class SIDDUChatbot:
     def get_response(self, user_message: str) -> str:
         """Generate intelligent response based on user input"""
         try:
-            # Clean and normalize user input
+  t
             clean_message = self.preprocess_message(user_message)
             
-            # Store conversation
+         
             self.conversation_history.append({
                 "user": user_message,
                 "timestamp": datetime.now().isoformat()
             })
-            
-            # Determine intent and generate response
+           
             intent = self.classify_intent(clean_message)
             response = self.generate_response(intent, clean_message)
             
-            # Store bot response
+           
             self.conversation_history.append({
                 "bot": response,
                 "timestamp": datetime.now().isoformat()
@@ -128,52 +134,49 @@ class SIDDUChatbot:
     
     def preprocess_message(self, message: str) -> str:
         """Clean and normalize user input"""
-        # Convert to lowercase
+   
         message = message.lower()
         
-        # Remove extra whitespace
+       
         message = re.sub(r'\s+', ' ', message).strip()
         
-        # Remove punctuation for better matching
+        
         message = re.sub(r'[^\w\s]', '', message)
         
         return message
     
     def classify_intent(self, message: str) -> str:
         """Classify user intent based on keywords"""
-        # Greeting patterns
+ 
         if any(word in message for word in ['hello', 'hi', 'hey', 'greetings', 'good morning', 'good afternoon']):
             return 'greeting'
-        
-        # Skills and technology patterns
+      
         if any(word in message for word in ['skill', 'technology', 'programming', 'language', 'framework', 'tool']):
             return 'skills'
         
-        # Experience patterns
         if any(word in message for word in ['experience', 'work', 'job', 'career', 'background', 'history']):
             return 'experience'
         
-        # Education patterns
+        
         if any(word in message for word in ['education', 'study', 'college', 'university', 'degree', 'academic']):
             return 'education'
-        
-        # Contact patterns
+       
         if any(word in message for word in ['contact', 'email', 'phone', 'reach', 'connect', 'get in touch']):
             return 'contact'
         
-        # Project patterns
+        
         if any(word in message for word in ['project', 'portfolio', 'work', 'development', 'application']):
             return 'projects'
         
-        # Certificate patterns
+       
         if any(word in message for word in ['certificate', 'certification', 'course', 'training', 'achievement']):
             return 'certificates'
         
-        # Personal info patterns
+       
         if any(word in message for word in ['name', 'who', 'about', 'personal', 'info']):
             return 'personal_info'
         
-        # Help patterns
+        
         if any(word in message for word in ['help', 'what can you do', 'assist', 'support']):
             return 'help'
         
@@ -208,70 +211,77 @@ class SIDDUChatbot:
     
     def get_skills_response(self) -> str:
         """Generate skills response"""
-        skills = self.resume_data['skills']
+        skills = self.resume_data.get('skills', {})
         
-        response = f"{self.resume_data['personal_info']['name']} is skilled in:\n\n"
+        name = self.resume_data.get('personal_info', {}).get('name', 'I')
+        response = f"{name} is skilled in:\n\n"
         response += "🎨 **Frontend Technologies:**\n"
-        response += f"• {', '.join(skills['frontend'])}\n\n"
+        response += f"• {', '.join(skills.get('frontend', []))}\n\n"
         response += "⚙️ **Backend Technologies:**\n"
-        response += f"• {', '.join(skills['backend'])}\n\n"
+        response += f"• {', '.join(skills.get('backend', []))}\n\n"
         response += "🗄️ **Database Technologies:**\n"
-        response += f"• {', '.join(skills['database'])}\n\n"
+        response += f"• {', '.join(skills.get('database', []))}\n\n"
         response += "🛠️ **Tools & Languages:**\n"
-        response += f"• {', '.join(skills['tools'] + skills['languages'])}\n\n"
+        tools = skills.get('tools', [])
+        languages = skills.get('languages', [])
+        response += f"• {', '.join(tools + languages)}\n\n"
         response += "He's particularly strong in Python, web development, and database management!"
         
         return response
     
     def get_experience_response(self) -> str:
         """Generate experience response"""
-        exp = self.resume_data['experience']
+        exp = self.resume_data.get('experience', {})
         
-        response = f"{self.resume_data['personal_info']['name']} is currently a {self.resume_data['education']['degree']} student at {self.resume_data['education']['institution']}.\n\n"
-        response += f"📊 **Experience Level:** {exp['level']}\n"
-        response += f"🎯 **Focus Area:** {exp['focus']}\n"
-        response += f"📜 **Certificates Completed:** {exp['certificates']}\n"
-        response += f"💼 **Projects Completed:** {exp['projects_completed']}\n\n"
+        name = self.resume_data.get('personal_info', {}).get('name', 'I')
+        edu = self.resume_data.get('education', {})
+        response = f"{name} is currently a {edu.get('degree', '')} student at {edu.get('institution', '')}.\n\n"
+        response += f"📊 **Experience Level:** {exp.get('level', '')}\n"
+        response += f"🎯 **Focus Area:** {exp.get('focus', '')}\n"
+        response += f"📜 **Certificates Completed:** {exp.get('certificates', '')}\n"
+        response += f"💼 **Projects Completed:** {exp.get('projects_completed', '')}\n\n"
         response += "He's passionate about software development and problem-solving, with hands-on experience through academic projects and self-learning initiatives."
         
         return response
     
     def get_education_response(self) -> str:
         """Generate education response"""
-        edu = self.resume_data['education']
+        edu = self.resume_data.get('education', {})
         
-        response = f"{self.resume_data['personal_info']['name']} is pursuing {edu['degree']} at {edu['institution']}.\n\n"
-        response += f"🎓 **Current Status:** {edu['status']}\n"
-        response += f"📚 **Focus Areas:** {', '.join(edu['focus_areas'])}\n\n"
+        name = self.resume_data.get('personal_info', {}).get('name', 'I')
+        response = f"{name} is pursuing {edu.get('degree', '')} at {edu.get('institution', '')}.\n\n"
+        response += f"🎓 **Current Status:** {edu.get('status', '')}\n"
+        response += f"📚 **Focus Areas:** {', '.join(edu.get('focus_areas', []))}\n\n"
         response += "He's passionate about technology and continuous learning, with a strong foundation in computer science fundamentals and modern development practices."
         
         return response
     
     def get_contact_response(self) -> str:
         """Generate contact response"""
-        contact = self.resume_data['personal_info']
+        contact = self.resume_data.get('personal_info', {})
         
-        response = f"You can reach {contact['name']} through:\n\n"
-        response += f"📧 **Email:** {contact['email']}\n"
-        response += f"📱 **Phone:** {contact['phone']}\n"
-        response += f"📍 **Location:** {contact['location']}\n"
-        response += f"🔗 **LinkedIn:** {contact['linkedin']}\n"
-        response += f"💻 **GitHub:** {contact['github']}\n\n"
+        response = f"You can reach {contact.get('name', 'me')} through:\n\n"
+        response += f"📧 **Email:** {contact.get('email', '')}\n"
+        response += f"📱 **Phone:** {contact.get('phone', '')}\n"
+        response += f"📍 **Location:** {contact.get('location', '')}\n"
+        response += f"🔗 **LinkedIn:** {contact.get('linkedin', '')}\n"
+        response += f"💻 **GitHub:** {contact.get('github', '')}\n\n"
         response += "He's available for freelance work and full-time opportunities!"
         
         return response
     
     def get_projects_response(self) -> str:
         """Generate projects response"""
-        projects = self.resume_data['projects']
+        projects = self.resume_data.get('projects', [])
         
-        response = f"{self.resume_data['personal_info']['name']} has worked on various projects:\n\n"
+        name = self.resume_data.get('personal_info', {}).get('name', 'I')
+        response = f"{name} has worked on various projects:\n\n"
         
         for i, project in enumerate(projects, 1):
-            response += f"**{i}. {project['name']}**\n"
-            response += f"📝 {project['description']}\n"
-            response += f"🛠️ Technologies: {', '.join(project['technologies'])}\n"
-            response += f"📂 Type: {project['type']}\n\n"
+            response += f"**{i}. {project.get('name', '')}**\n"
+            response += f"📝 {project.get('description', '')}\n"
+            response += f"🛠️ Technologies: {', '.join(project.get('technologies', []))}\n"
+            response += f"📂 Type: {project.get('type', '')}\n\n"
         
         response += "He's particularly interested in creating user-friendly and efficient solutions!"
         
@@ -279,16 +289,17 @@ class SIDDUChatbot:
     
     def get_certificates_response(self) -> str:
         """Generate certificates response"""
-        certificates = self.resume_data['certificates']
+        certificates = self.resume_data.get('certificates', [])
         
-        response = f"{self.resume_data['personal_info']['name']} has completed several certifications:\n\n"
+        name = self.resume_data.get('personal_info', {}).get('name', 'I')
+        response = f"{name} has completed several certifications:\n\n"
         
         for cert in certificates:
-            response += f"🏆 **{cert['name']}**\n"
-            response += f"📜 Issuer: {cert['issuer']}\n"
-            response += f"📅 Date: {cert['date']}\n"
-            if cert['url'] != '#':
-                response += f"🔗 Verify: {cert['url']}\n"
+            response += f"🏆 **{cert.get('name', '')}**\n"
+            response += f"📜 Issuer: {cert.get('issuer', '')}\n"
+            response += f"📅 Date: {cert.get('date', '')}\n"
+            if cert.get('url') and cert.get('url') != '#':
+                response += f"🔗 Verify: {cert.get('url')}\n"
             response += "\n"
         
         response += "These certifications demonstrate his commitment to continuous learning and skill development!"
@@ -297,13 +308,13 @@ class SIDDUChatbot:
     
     def get_personal_info_response(self) -> str:
         """Generate personal info response"""
-        personal = self.resume_data['personal_info']
+        personal = self.resume_data.get('personal_info', {})
         
-        response = f"**{personal['name']}**\n"
-        response += f"🎯 {personal['title']}\n\n"
-        response += f"📍 Based in {personal['location']}\n"
-        response += f"📧 {personal['email']}\n"
-        response += f"📱 {personal['phone']}\n\n"
+        response = f"**{personal.get('name', '')}**\n"
+        response += f"🎯 {personal.get('title', '')}\n\n"
+        response += f"📍 Based in {personal.get('location', '')}\n"
+        response += f"📧 {personal.get('email', '')}\n"
+        response += f"📱 {personal.get('phone', '')}\n\n"
         response += "He's a passionate Computer Science student with a keen interest in software development and innovative solutions!"
         
         return response
@@ -357,6 +368,15 @@ app = Flask(__name__)
 CORS(app)
 
 chatbot = SIDDUChatbot()
+
+@app.route('/api/resume', methods=['GET'])
+def get_resume():
+    """Return full resume JSON used by the chatbot"""
+    try:
+        return jsonify(chatbot.resume_data)
+    except Exception as e:
+        logger.error(f"Resume endpoint error: {e}")
+        return jsonify({'error': 'Unable to fetch resume data'}), 500
 
 @app.route('/api/chat', methods=['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'])
 def chat():
