@@ -1,13 +1,43 @@
 
 function myMenuFunction(){
     var menuBtn = document.getElementById("myNavMenu");
+    var overlay = document.getElementById("mobile-overlay");
+    var body = document.body;
 
     if(menuBtn.className === "nav-menu"){
       menuBtn.className += " responsive";
+      overlay.classList.add("active");
+      body.style.overflow = "hidden"; // Prevent background scrolling
     } else {
       menuBtn.className = "nav-menu";
+      overlay.classList.remove("active");
+      body.style.overflow = ""; // Restore scrolling
     }
   }
+
+  // Close mobile menu when clicking overlay
+  document.addEventListener('DOMContentLoaded', function() {
+    var overlay = document.getElementById("mobile-overlay");
+    var menuBtn = document.getElementById("myNavMenu");
+    
+    if (overlay) {
+      overlay.addEventListener('click', function() {
+        menuBtn.className = "nav-menu";
+        overlay.classList.remove("active");
+        document.body.style.overflow = "";
+      });
+    }
+    
+    // Close mobile menu when clicking on nav links
+    var navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        menuBtn.className = "nav-menu";
+        overlay.classList.remove("active");
+        document.body.style.overflow = "";
+      });
+    });
+  });
 
 
   window.onscroll = function() {headerShadow()};
