@@ -1,6 +1,3 @@
-/* ----- POPPINS FONT Link ----- */
-
-
 :root{
     background-color: #30532a;
     background-image: linear-gradient(180deg, #3c1053 0%, #ad5389 100%);
@@ -44,7 +41,7 @@ html{
     scroll-behavior: smooth;
 }
 
-/* ----- CHANGE THE SCROLL BAR DESIGN ----- */
+
 ::-webkit-scrollbar{
     width: 10px;
     border-radius: 25px;
@@ -166,7 +163,7 @@ nav{
     border-radius: 50%;
 }
 
-/* Enhanced Theme Toggle */
+
 .theme-toggle {
     position: relative;
     cursor: pointer;
@@ -1714,3 +1711,4 @@ nav:hover {
     pointer-events: none;
 }
 .image:hover::after { opacity: 1; }
+
